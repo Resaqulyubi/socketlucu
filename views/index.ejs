@@ -47,6 +47,7 @@
    $(function () {
     var socket = io();
     var blor=0;
+    var jumlah=0
     $('form').submit(function(){
       socket.emit('chat message', {username:'<%= username %>',message:$('#m').val()});
       $('#m').val('');
@@ -61,10 +62,13 @@
           // event.preventDefault();
     // Getting the height of the document
     var n = $(document).height();
+
     $('html, body').animate({ scrollTop: n }, 50);
 if(blor==1){
       var audio = new Audio('/received_message.mp3');
 audio.play();
+jumlah++
+    $("title").eq(0).text(`(${jumlah}) PLFM CHAT`)
 }
 
     });
@@ -78,14 +82,17 @@ function windowBlurred()
 //     if(jumlah!=0){
 
 //     }
-blor=1
-    console.log('blur');
+blor=1;
+
+    // console.log('blur');
 }
 
 function windowFocused()
 {
-  blor=0
-    console.log('focus');
+  jumlah=0
+$("title").eq(0).text(`PLFM CHAT`)
+  blor=0;
+    // console.log('focus');
 
 }
   });
