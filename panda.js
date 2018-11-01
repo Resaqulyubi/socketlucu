@@ -42,9 +42,9 @@ app.get('/logout',(req,res)=>{
 })
 io.on('connection', function(socket){
    socket.on('chat message', function(msg){
-    console.log(msg);
+    // console.log(msg);
 
-     io.emit('chat message', JSON.parse(msg));
+     io.emit('chat message', typeof msg=="string"?JSON.parse(msg):msg);
   });
 });
 
