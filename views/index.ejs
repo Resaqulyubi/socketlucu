@@ -21,11 +21,11 @@
   </head>
   <body>
     <div class="row">
-      <audio controls style="display:none;">
-  <source src="horse.ogg" type="audio/ogg">
-  <source src="horse.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
+<!--      <audio controls  id="message-sound">-->
+  <!--<source src="horse.ogg" type="audio/ogg">-->
+<!--  <source src="/received_message.mp3" type="audio/mpeg">-->
+<!--Your browser does not support the audio element.-->
+<!--</audio>-->
       <div class="col-sm-12">
     <ul id="messages" style="padding-bottom: 25px !important;"></ul>
       </div>
@@ -46,6 +46,7 @@ Your browser does not support the audio element.
 <script>
    $(function () {
     var socket = io();
+    var blor=0;
     $('form').submit(function(){
       socket.emit('chat message', {username:'<%= username %>',message:$('#m').val()});
       $('#m').val('');
@@ -61,7 +62,32 @@ Your browser does not support the audio element.
     // Getting the height of the document
     var n = $(document).height();
     $('html, body').animate({ scrollTop: n }, 50);
+if(blor==1){
+      var audio = new Audio('/received_message.mp3');
+audio.play();
+}
+
     });
+
+    $(window).on('blur', windowBlurred);
+    $(window).on('focus', windowFocused);
+
+
+function windowBlurred()
+{
+//     if(jumlah!=0){
+
+//     }
+blor=1
+    console.log('blur');
+}
+
+function windowFocused()
+{
+  blor=0
+    console.log('focus');
+
+}
   });
 </script>
 </html>

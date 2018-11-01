@@ -1,4 +1,5 @@
 var app = require('express')();
+const express = require('express');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const uuid = require('uuid/v4')
@@ -9,6 +10,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }))
+app.use(express.static('public'))
 app.set('view engine', 'ejs');
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }))
