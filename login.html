@@ -1,4 +1,12 @@
 login dulu
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 <form action="/logins" method="post">
 nickname: <input name="username" />
 </form>
+<script>
+var socket = io();
+    $("form").eq(0).on("submit",()=>{
+socket.emit("add user",{username:$("input").eq(0).val()})
+    })
+</script>
