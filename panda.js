@@ -80,11 +80,11 @@ var data=typeof msg=="string"?JSON.parse(msg):msg;
   }
 
   });
-  socket.on('keypress', function(msg){
-    // console.log(msg);
+//   socket.on('keypress', function(msg){
+//     // console.log(msg);
 
-     io.emit('keypress', typeof msg=="string"?JSON.parse(msg):msg);
-  });
+//      io.emit('keypress', typeof msg=="string"?JSON.parse(msg):msg);
+//   });
 });
 
 http.listen(process.env.PORT || 3000, function(){

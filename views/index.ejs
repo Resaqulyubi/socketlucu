@@ -193,13 +193,13 @@ h1 {
     var jumlah=0
     var siapa=[]
    var typing=false
-    $( "#m" ).keyup(function(e) {
-      if(e.which!=13){
+//     $( "#m" ).keyup(function(e) {
+//       if(e.which!=13){
 
-  socket.emit('keypress', {username:username,message:$('#m').val()});
-      }
+//   socket.emit('keypress', {username:username,message:$('#m').val()});
+//       }
 
-});
+// });
 socket.on("add user",data=>{
 $('#kemplo').append($('<li style="color:blue;">').html(`jumlah partisipan <b>${data.jumlah}</b>`));
 $('#kemplo').append($('<li style="color:blue;">').html(`<b>${data.username}</b> masuk`));
@@ -220,19 +220,19 @@ $('#kemplo').append($('<li style="color:red;">').html(`<b>${data.username}</b> k
 
 //   // socket.emit('keypress', {username:'<%= username %>',message:$('#m').val()});
 // });
-socket.on('keypress', function(msg){
-if(siapa.indexOf(msg.username)==-1){
-  siapa.push(msg.username)
-setTimeout(()=>{
-  siapa.splice(siapa.indexOf(msg.username), 1);
-$("#junaedi").css("color","white")
-},400)
+// socket.on('keypress', function(msg){
+// if(siapa.indexOf(msg.username)==-1){
+//   siapa.push(msg.username)
+// setTimeout(()=>{
+//   siapa.splice(siapa.indexOf(msg.username), 1);
+// $("#junaedi").css("color","white")
+// },400)
 
-}
-$("#junaedi").css("color","black")
-$("#junaedi").html(`<i><b>${siapa.join()}</b> sedang mengetik...</i>`)
+// }
+// $("#junaedi").css("color","black")
+// $("#junaedi").html(`<i><b>${siapa.join()}</b> sedang mengetik...</i>`)
 
-})
+// })
     $('form').submit(function(){
       socket.emit('chat message', {username:username,message:$('#m').val()});
       $('#m').val('');
