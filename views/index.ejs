@@ -162,7 +162,7 @@ h1 {
       <div id="kemplo">
 
       </div>
-      <li id="junaedi" style="display:none;"></li>
+      <li id="junaedi" style="color:white;">sdasds</li>
     </ul>
 
       </div>
@@ -201,8 +201,8 @@ h1 {
 
 });
 socket.on("add user",data=>{
-$('#kemplo').append($('<li>').html(`jumlah partisipan <b>${data.jumlah}</b>`));
-$('#kemplo').append($('<li>').html(`<b>${data.username}</b> masuk`));
+$('#kemplo').append($('<li style="color:blue;">').html(`jumlah partisipan <b>${data.jumlah}</b>`));
+$('#kemplo').append($('<li style="color:blue;">').html(`<b>${data.username}</b> masuk`));
 })
 
 socket.on("remove user",data=>{
@@ -211,8 +211,8 @@ socket.on("remove user",data=>{
     console.log(data.username)
 socket.emit("add user",{username:username})
   }else{
-$('#kemplo').append($('<li>').html(`jumlah partisipan <b>${data.jumlah}</b>`));
-$('#kemplo').append($('<li>').html(`<b>${data.username}</b> keluar`));
+$('#kemplo').append($('<li style="color:red;">').html(`jumlah partisipan <b>${data.jumlah}</b>`));
+$('#kemplo').append($('<li style="color:red;">').html(`<b>${data.username}</b> keluar`));
   }
 
 })
@@ -225,11 +225,11 @@ if(siapa.indexOf(msg.username)==-1){
   siapa.push(msg.username)
 setTimeout(()=>{
   siapa.splice(siapa.indexOf(msg.username), 1);
-$("#junaedi").hide()
+$("#junaedi").css("color","white")
 },400)
 
 }
-$("#junaedi").show()
+$("#junaedi").css("color","black")
 $("#junaedi").html(`<i><b>${siapa.join()}</b> sedang mengetik...</i>`)
 
 })
@@ -237,7 +237,7 @@ $("#junaedi").html(`<i><b>${siapa.join()}</b> sedang mengetik...</i>`)
       socket.emit('chat message', {username:username,message:$('#m').val()});
       $('#m').val('');
       siapa=[]
-$("#junaedi").hide()
+$("#junaedi").css("color","white")
           // event.preventDefault();
     // Getting the height of the document
     var n = $(document).height();
@@ -245,7 +245,7 @@ $("#junaedi").hide()
       return false;
     });
     socket.on('chat message', function(msg){
-      $('#kemplo').append($('<li>').html(`<b>${msg.username}</b>: ${msg.message}`));
+      $('#kemplo').append($('<li style="font-size:20px">').html(`<b>${msg.username}</b>: ${msg.message}`));
           // event.preventDefault();
     // Getting the height of the document
     var n = $(document).height();
@@ -330,6 +330,9 @@ socket.emit("add user",{username:questions[0].value})
           h1.style.opacity = 1;
       setTimeout(()=>{
           $("#kecil").show()
+          $("html").css("background-color","white")
+          $("#kecil").css("background-color","white")
+
      $("#kucing").hide()
       },3000)
 

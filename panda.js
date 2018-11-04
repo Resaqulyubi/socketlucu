@@ -5,6 +5,7 @@ var io = require('socket.io')(http);
 const uuid = require('uuid/v4')
 const session = require('express-session')
 const FileStore = require('session-file-store')(session);
+const _=require('underscore')
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -68,8 +69,16 @@ jumlah.splice(index, 1);
    });
    socket.on('chat message', function(msg){
     // console.log(msg);
+var data=typeof msg=="string"?JSON.parse(msg):msg;
+  _.mixin({
+    isBlank: function(string) {
+      return (_.isUndefined(string) || _.isNull(string) || string.trim().length === 0)
+    }
+  });
+  if(!_(data.message).isBlank()){
+     io.emit('chat message', data);
+  }
 
-     io.emit('chat message', typeof msg=="string"?JSON.parse(msg):msg);
   });
   socket.on('keypress', function(msg){
     // console.log(msg);
